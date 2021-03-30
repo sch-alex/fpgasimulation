@@ -14,7 +14,7 @@ foreach item $contents {
 	set testpath [split $item "/"]
 	set testfile [split [lindex $testpath 1] "."]
 	set testname [lindex $testfile 0]
-	vsim top -novopt -coverage -debugDB=debug/$testname.dbg -wlf debug/$testname.wlf -l debug/$testname.txt -assertdebug
+	vsim top  -coverage -debugDB=debug/$testname.dbg -wlf debug/$testname.wlf -l debug/$testname.txt -assertdebug
 	set NoQuitOnFinish 1
 	onbreak {resume}
 	log -r /*

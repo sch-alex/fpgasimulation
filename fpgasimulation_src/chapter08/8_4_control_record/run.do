@@ -8,7 +8,7 @@ if {[file exists accellera_ovl_vhdl]==0} {
 if [file exists work] {vdel -lib work -all}
 vlib work
 vcom -f compile_vhdl.f
-vsim -novopt tb_top;
+vsim  tb_top;
 log -r /*
 set NoQuitOnFinish 1
 set NumericStdNoWarnings 1
