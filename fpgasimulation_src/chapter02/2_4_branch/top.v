@@ -48,10 +48,10 @@ wire       cpu_wr;
 wire [7:0] cpubus_address;
 wire [7:0] cpubus_data;
 wire       cpuwait;
-wire [7:0] memory_address;
-wire [7:0] memory_data;
-wire       memory_rd;
-wire       memory_wr;
+wire [7:0] mem_address;
+wire [7:0] mem_data;
+wire       mem_rd;
+wire       mem_wr;
 wire       reset;
 wire       response;
 wire [2:0] trans;
@@ -74,11 +74,11 @@ cpubus_monitor_sm cpubus_monitor(
 );
 
 memory main_mem(
-   .clk            (clk),
-   .memory_address (memory_address),
-   .memory_rd      (memory_rd),
-   .memory_wr      (memory_wr),
-   .memory_data    (memory_data)
+   .clk         (clk),
+   .mem_address (mem_address),
+   .mem_rd      (mem_rd),
+   .mem_wr      (mem_wr),
+   .mem_data    (mem_data)
 );
 
 scoreboard #(0,1,2,3,4,5,6,7,1,2) design_checker(
@@ -88,10 +88,10 @@ scoreboard #(0,1,2,3,4,5,6,7,1,2) design_checker(
    .cpu_wr         (cpu_wr),
    .cpubus_address (cpubus_address),
    .cpubus_data    (cpubus_data),
-   .memory_address (memory_address),
-   .memory_data    (memory_data),
-   .memory_rd      (memory_rd),
-   .memory_wr      (memory_wr),
+   .mem_address    (mem_address),
+   .mem_data       (mem_data),
+   .mem_rd         (mem_rd),
+   .mem_wr         (mem_wr),
    .reset          (reset),
    .response       (response),
    .trans          (trans)
@@ -114,11 +114,11 @@ tiny_cache_vhd DUT(
    .cpu_wr      (cpu_wr),
    .rst         (reset),
    .cpuwait     (cpuwait),
-   .mem_address (memory_address),
-   .mem_rd      (memory_rd),
-   .mem_wr      (memory_wr),
+   .mem_address (mem_address),
+   .mem_rd      (mem_rd),
+   .mem_wr      (mem_wr),
    .cpu_data    (cpubus_data),
-   .mem_data    (memory_data)
+   .mem_data    (mem_data)
 );
 
 // HDL Embedded Text Block eb1

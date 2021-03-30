@@ -1,8 +1,8 @@
-cpubus_monitor_sm_fsm.v
-cpubus_sm_fsm.v
-memory.v
-scoreboard.v
-tester.v
+../../tiny_cache/cpubus_monitor_sm_fsm.v
+../../tiny_cache/cpubus_sm_fsm.v
+../../tiny_cache/memory.v
+../../tiny_cache/scoreboard.v
+../../tiny_cache/tester.v
 tiny_cache.v
-testrunner.v
+../../tiny_cache/testrunner.v
 top.v

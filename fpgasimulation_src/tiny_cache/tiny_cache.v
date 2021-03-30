@@ -31,11 +31,11 @@ module tiny_cache_vlog(
    cpu_wr, 
    reset, 
    cpuwait, 
-   memory_address, 
-   memory_rd, 
-   memory_wr, 
+   mem_address, 
+   mem_rd, 
+   mem_wr, 
    cpu_data, 
-   memory_data
+   mem_data
 );
 
 
@@ -57,11 +57,11 @@ input        cpu_rd;
 input        cpu_wr;
 input        reset;
 output       cpuwait;
-output [7:0] memory_address;
-output       memory_rd;
-output       memory_wr;
+output [7:0] mem_address;
+output       mem_rd;
+output       mem_wr;
 inout  [7:0] cpu_data;
-inout  [7:0] memory_data;
+inout  [7:0] mem_data;
 
 
 wire clk;
@@ -70,11 +70,11 @@ wire cpu_rd;
 wire cpu_wr;
 wire reset;
 wire cpuwait;
-wire [7:0] memory_address;
-reg memory_rd;
-reg memory_wr;
+wire [7:0] mem_address;
+reg mem_rd;
+reg mem_wr;
 wire [7:0] cpu_data;
-wire [7:0] memory_data;
+wire [7:0] mem_data;
 reg [1:0] cache_control_current_state, cache_control_next_state;
 // pragma state_vector cache_control_current_state
 
@@ -92,9 +92,9 @@ reg [CACHE_DEPTH-1 : 0] invalid ;
 // eb1 1    
 
 assign cpu_data  = (cpu_rd) ? cache_ram[cache_address] : 8'HZZ;
-assign memory_data = (memory_wr) ? cpu_data : 8'HZZ;
+assign mem_data = (mem_wr) ? cpu_data : 8'HZZ;
 assign cache_address = cpu_address[3:0];
-assign memory_address = cpu_address;   
+assign mem_address = cpu_address;   
 assign cpuwait =  ((key_ram[cache_address] != cpu_address) ||
                            (invalid [cache_address]) )&& cpu_rd; 
 // (cpu_wr && (cache_address == 1)) ||
@@ -141,19 +141,19 @@ always @(
 )
 begin : cache_control_output_block_proc
    // Default Assignment
-   memory_rd = 0;
-   memory_wr = 0;
+   mem_rd = 0;
+   mem_wr = 0;
 
    // Combined Actions
    case (cache_control_current_state) 
       HIT: begin
-         memory_wr = 0;
+         mem_wr = 0;
       end
       WRITE: begin
-         memory_wr = 1;
+         mem_wr = 1;
       end
       MISS: begin
-         memory_rd = 1;
+         mem_rd = 1;
       end
       default: begin
       end
@@ -180,7 +180,7 @@ begin : cache_control_clocked_block_proc
                cache_ram[cache_address] = cpu_data;
             end
             MISS: begin
-               cache_ram[cache_address] = memory_data;
+               cache_ram[cache_address] = mem_data;
                key_ram[cache_address] = cpu_address;
                invalid[cache_address] = 0;
             end
@@ -192,11 +192,4 @@ begin : cache_control_clocked_block_proc
    end
 end // Clocked Block
 
-
-
-
-
-
-
 endmodule // tiny_cache_vlog
-

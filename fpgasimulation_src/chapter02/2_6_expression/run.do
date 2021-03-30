@@ -1,7 +1,7 @@
 if [file exists work] {vdel -all}
 vlib work
 vlog -f compile.f
-vlog -coverExcludeDefault -cover e tiny_cache.v
+vlog -coverExcludeDefault -cover e ../../tiny_cache/tiny_cache.v
 vsim -coverage top
 set NoQuitOnFinish 1
 set NumericStdNoWarnings 1

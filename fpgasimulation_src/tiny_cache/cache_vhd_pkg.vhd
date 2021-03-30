@@ -12,7 +12,7 @@
 -- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 -- See the License for the specific language governing permissions and
 -- limitations under the License.
--- ********************************************************************
+-- ********************************************************************--
 -- VHDL Package Header tinycache_sv.cache_vhd_pkg
 --
 -- File   : tiny_cache.sv
@@ -28,21 +28,21 @@
 --
 
 LIBRARY ieee;
-USE ieee.std_logic_1164.ALL;
+USE ieee.std_logic_1164.all;
 
 PACKAGE cache_vhd_pkg IS
-
-  CONSTANT CACHE_ADDRESS_WIDTH : INTEGER := 8;
-  CONSTANT MEMORY_ADDRESS_WIDTH : INTEGER := 8;
-  CONSTANT DATA_WIDTH : INTEGER := 8;
-  CONSTANT CACHE_DEPTH : INTEGER := (2 ** CACHE_ADDRESS_WIDTH) - 1;
-  CONSTANT MEMORY_DEPTH : INTEGER := (2 ** MEMORY_ADDRESS_WIDTH) - 1;
-
-  SUBTYPE data_t IS STD_LOGIC_VECTOR (DATA_WIDTH - 1 DOWNTO 0);
-  SUBTYPE address_t IS STD_LOGIC_VECTOR (MEMORY_ADDRESS_WIDTH - 1 DOWNTO 0);
-  SUBTYPE cache_address_t IS STD_LOGIC_VECTOR (CACHE_ADDRESS_WIDTH - 1 DOWNTO 0);
-
-  TYPE cache_ram_t IS ARRAY (CACHE_DEPTH DOWNTO 0) OF STD_LOGIC_VECTOR(DATA_WIDTH - 1 DOWNTO 0);
-  TYPE key_ram_t IS ARRAY (CACHE_DEPTH DOWNTO 0) OF address_t;
+  
+  CONSTANT CACHE_ADDRESS_WIDTH  : integer := 8;
+  CONSTANT MEMORY_ADDRESS_WIDTH : integer := 8;
+  CONSTANT DATA_WIDTH           : integer := 8;
+  CONSTANT CACHE_DEPTH          : integer := (2**CACHE_ADDRESS_WIDTH)-1;
+  CONSTANT MEMORY_DEPTH         : integer := (2**MEMORY_ADDRESS_WIDTH)-1;
+  
+  SUBTYPE data_t          IS std_logic_vector (DATA_WIDTH-1 downto 0);
+  SUBTYPE address_t       IS std_logic_vector (MEMORY_ADDRESS_WIDTH-1 downto 0);
+  SUBTYPE cache_address_t IS std_logic_vector (CACHE_ADDRESS_WIDTH-1 downto 0);
+  
+  TYPE cache_ram_t        IS ARRAY (CACHE_DEPTH DOWNTO 0) OF std_logic_vector(DATA_WIDTH-1 DOWNTO 0);
+  TYPE key_ram_t          IS ARRAY (CACHE_DEPTH DOWNTO 0) OF address_t;
 
 END cache_vhd_pkg;

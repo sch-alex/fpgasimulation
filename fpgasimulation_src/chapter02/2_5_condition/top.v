@@ -107,12 +107,12 @@ tester test_runner(
    .cpu_data       (cpubus_data)
 );
 
-tiny_cache_vlg DUT(
+tiny_cache_vlog DUT(
    .clk         (clk),
    .cpu_address (cpubus_address),
    .cpu_rd      (cpu_rd),
    .cpu_wr      (cpu_wr),
-   .rst         (reset),
+   .reset       (reset),
    .cpuwait     (cpuwait),
    .mem_address (memory_address),
    .mem_rd      (memory_rd),
