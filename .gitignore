@@ -1,0 +1,18 @@
+# exclude all
+*
+
+# watch subfolders
+!*/
+
+# watch .gitignore
+!.gitignore
+
+# HDL source files
+!*.vhd
+!*.v
+!*.sv
+
+# Modelsim/Questasim
+!*.do
+
+# Vivado
